@@ -73,7 +73,7 @@ end
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 theme.border_width  = 1
-theme.wallpaper = "/usr/share/backgrounds/Forever_by_Shady_S.jpg"
+theme.wallpaper = config_path.."/backgrounds/Forever_by_Shady_S.jpg"
 theme.font = "Ubuntu 12"
 theme.menu_width  = 200
 theme.menu_height = 24
