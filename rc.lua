@@ -617,7 +617,7 @@ do
         -- 音量指示器  Ubuntu下可以用apt-get install volumeicon-alsa安装
         "volumeicon",
         -- 真透明
-        { name = "xcompmgr", cmd = "xcompmgr -c" },
+        "compton",
     }
     if type(awesome_local.prgs) == 'table' then
         for _, v in ipairs(awesome_local.prgs) do
