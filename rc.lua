@@ -11,8 +11,6 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
--- Load Debian menu entries
-require("debian.menu")
 -- vicious
 vicious = require("vicious")
 -- }}}
@@ -74,13 +72,14 @@ end
 beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 theme.border_width  = 1
 theme.wallpaper = config_path.."/backgrounds/Forever_by_Shady_S.jpg"
-theme.font = "Ubuntu 12"
+theme.font = "文泉驿微米黑 12"
 theme.menu_width  = 200
 theme.menu_height = 24
-awesome.font = "Ubuntu 12"
+awesome.font = "文泉驿微米黑 12"
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
+--terminal = "x-terminal-emulator"
+terminal = "xfce4-terminal"
 editor = os.getenv("EDITOR") or "editor"
 gui_editor = "gvim"
 editor_cmd = terminal .. " -e " .. editor
@@ -148,7 +147,6 @@ mysystemmenu = {
 mymainmenu = awful.menu({ 
     items = { 
         { "&Awesome", myawesomemenu, beautiful.awesome_icon },
-        { "&Debian", debian.menu.Debian_menu.Debian, icons_path.."debian.png" },
         { "&Terminal", terminal, icons_path.."terminal.png" },
         { "G&vim", "gvim", icons_path.."vim.svg" },
         { "&Chrome", "google-chrome", icons_path.."google-chrome.png" },
@@ -609,7 +607,7 @@ do
         -- 网络指示器
         "nm-applet",
         -- 屏保
-        "xscreensaver",
+        { name = "xscreensaver", cmd = "xscreensaver -nosplash" },
         -- 输入法
         "fcitx",
         -- 收信
@@ -618,6 +616,8 @@ do
         "parcellite",
         -- 音量指示器  Ubuntu下可以用apt-get install volumeicon-alsa安装
         "volumeicon",
+        -- 真透明
+        { name = "xcompmgr", cmd = "xcompmgr -c" },
     }
     if type(awesome_local.prgs) == 'table' then
         for _, v in ipairs(awesome_local.prgs) do
