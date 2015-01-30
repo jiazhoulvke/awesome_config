@@ -152,7 +152,7 @@ mymainmenu = awful.menu({
         { "&Chrome", "google-chrome", icons_path.."google-chrome.png" },
         { "&Google Keep", "/opt/google/chrome/google-chrome --profile-directory=Default --app-id=hmjkmjkepdijhoojdojkdfohbdgmmhki", icons_path.."Google_Keep.png" },
         { "&Firefox", "firefox", icons_path.."firefox.png" },
-        { "&VirtualBox", "virtualbox", icons_path.."virtualbox.png" },
+        { "Virtual&Box", "virtualbox", icons_path.."virtualbox.png" },
         { "(&Q)TM2013", "/opt/cxoffice/bin/wine --bottle 'xp' --check --wait-children --start 'C:/users/Public/Start Menu/Programs/腾讯软件/TM2013/腾讯TM.lnk'", icons_path.."TM.png" },
         { "&File", "thunar", icons_path.."Thunar.png" },
         { "&System", mysystemmenu, icons_path.."system.png" },
