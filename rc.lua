@@ -318,6 +318,9 @@ globalkeys = awful.util.table.join(
     -- Gvim
     awful.key({ modkey,           }, "v", function () awful.util.spawn("gvim") end),
 
+    --urxvt
+    awful.key({ "Mod1", "Control" }, "t", function () awful.util.spawn_with_shell("urxvt") end), 
+
     -- 截图
     awful.key({                   }, "Print", function () awful.util.spawn_with_shell("import -window root $HOME/Pictures/screenshots/`date +%Y%m%d_%H%M%S`.png") end), 
     awful.key({ "Mod1"             }, "Print", function () awful.util.spawn_with_shell("import -frame $HOME/Pictures/screenshots/`date +%Y%m%d_%H%M%S`.png") end), 
