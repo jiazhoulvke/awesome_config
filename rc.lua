@@ -312,6 +312,19 @@ globalkeys = awful.util.table.join(
         end),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end),
 
+    -- 切换屏保
+    awful.key({                   }, "XF86ScreenSaver", 
+        function ()         
+            local xsc = io.popen("pgrep -x xscreensaver | wc -l"):read()
+            if xsc == "0" then
+                awful.util.spawn("xscreensaver -nosplash")
+                naughty.notify({ text = "开启屏保", })
+            else
+                awful.util.spawn("killall xscreensaver")
+                naughty.notify({ text = "关闭屏保", })
+            end
+        end),
+
     -- 文件管理器
     awful.key({ modkey,           }, "e", function () awful.util.spawn("thunar") end),
 
@@ -334,6 +347,12 @@ globalkeys = awful.util.table.join(
     awful.key({                   }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer set Master 5%+") end),
     awful.key({                   }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer set Master 5%-") end),
     awful.key({                   }, "XF86AudioMute", function () awful.util.spawn("amixer set Master toggle") end),
+
+    -- 音乐控制
+    awful.key({                   }, "XF86AudioPlay", function () awful.util.spawn("mpc toggle") end),
+    awful.key({                   }, "XF86AudioStop", function () awful.util.spawn("mpc stop") end),
+    awful.key({                   }, "XF86AudioPrev", function () awful.util.spawn("mpc prev") end),
+    awful.key({                   }, "XF86AudioNext", function () awful.util.spawn("mpc next") end),
 
     -- 关闭触摸板
     awful.key({                   }, "XF86TouchpadToggle", function () awful.util.spawn_with_shell("synclient TouchpadOff=`synclient -l | grep -ce 'TouchpadOff.*0'`") end),
@@ -384,12 +403,10 @@ globalkeys = awful.util.table.join(
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
-    --awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end),
     awful.key({ modkey,           }, "q",      function (c) c:kill()                         end),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
-    --awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",
         function (c)
@@ -609,21 +626,14 @@ end
 
 do
     local prgs = {
-        -- 网盘
         { name = "dropbox", cmd = "dropbox start" },
-        -- 网络指示器
-        "nm-applet",
-        -- 屏保
         { name = "xscreensaver", cmd = "xscreensaver -nosplash" },
-        -- 输入法
+        "mpd",
+        "nm-applet",
         "fcitx",
-        -- 收信
         "offlineimap",
-        -- 剪贴板
         "parcellite",
-        -- 音量指示器  Ubuntu下可以用apt-get install volumeicon-alsa安装
         "volumeicon",
-        -- 真透明
         "compton",
     }
     if type(awesome_local.prgs) == 'table' then
@@ -648,7 +658,6 @@ do
         end
     end
 end
-
 
 -- 如果存在 $HOME/.config/awesome/autostart.sh 则运行
 do
