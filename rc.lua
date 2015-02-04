@@ -94,8 +94,8 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
 {
-    awful.layout.suit.tile,
     awful.layout.suit.floating,
+    awful.layout.suit.tile,
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
@@ -487,10 +487,11 @@ awful.rules.rules = {
             focus = awful.client.focus.filter,
             raise = true,
             keys = clientkeys,
-            buttons = clientbuttons 
+            buttons = clientbuttons,
+            size_hints_honor = false,
         } 
     },
-    { 
+    {
         rule_any = {
             class = {
                 "Flashplayer",
@@ -502,6 +503,7 @@ awful.rules.rules = {
                 "Firefox",
                 "Stardict",
                 "Crossover",
+                "Inkscape",
             },
         },
         properties = {
